@@ -1,3 +1,4 @@
+require 'watir'
 require "watir-webdriver"
 require "rspec/expectations"
 
@@ -20,6 +21,10 @@ end
 
 And /^I enter "([^"]*)" into the password field$/ do |password|
   @browser.text_field(:id => "Passwd").set password
+end
+
+Then /^I click the compose button$/ do
+  @browser.div(:class => "z0").div.click
 end
 
 Then /^I click on the first email$/ do
