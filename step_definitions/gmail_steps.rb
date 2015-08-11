@@ -27,6 +27,20 @@ Then /^I click the compose button$/ do
   @browser.div(:class => "z0").div.click
 end
 
+Then /^I type my own address in the recipient bar$/ do
+  recipients = @browser.textarea(:index => 0)
+  recipients.set("truckas4urus@gmail.com")
+  2.times { recipients.send_keys :tab }
+end
+
+Then /^I type a subject$/ do
+  @browser.send_keys("Watir")
+end
+
+Then /^I write my email$/ do
+  
+end
+
 Then /^I click on the first email$/ do
   email = @browser.table(:index => 5)[0][5]
   email.click
