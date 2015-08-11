@@ -38,7 +38,13 @@ Then /^I type a subject$/ do
 end
 
 Then /^I write my email$/ do
-  
+  @browser.send_keys :tab
+  @browser.send_keys "Hello world"
+end
+
+Finally /^I hit send$/ do
+  @browser.send_keys :tab
+  @browser.send_keys :enter
 end
 
 Then /^I click on the first email$/ do
