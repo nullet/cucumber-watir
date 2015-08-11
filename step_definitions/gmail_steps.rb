@@ -1,4 +1,3 @@
-require 'watir'
 require "watir-webdriver"
 require "rspec/expectations"
 
@@ -8,6 +7,7 @@ Given /^I am at gmail$/ do
 end
 
 And /^I enter "([^"]*)" into the username field$/ do |username|
+  @username = username
   @browser.text_field(:id => "Email").set username
 end
 
@@ -29,7 +29,7 @@ end
 
 Then /^I type my own address in the recipient bar$/ do
   recipients = @browser.textarea(:index => 0)
-  recipients.set("truckas4urus@gmail.com")
+  recipients.set(@username + "@gmail.com")
   2.times { recipients.send_keys :tab }
 end
 
@@ -42,9 +42,13 @@ Then /^I write my email$/ do
   @browser.send_keys "Hello world"
 end
 
-Finally /^I hit send$/ do
+Then /^I hit send$/ do
   @browser.send_keys :tab
   @browser.send_keys :enter
+end
+
+Then /^I reload my inbox$/ do
+  @browser.refresh
 end
 
 Then /^I click on the first email$/ do
@@ -52,20 +56,19 @@ Then /^I click on the first email$/ do
   email.click
 end
 
-Then /^I close the browser$/ do 
-  @browser.close
+Then /^I check to make sure I clicked the right email$/ do
+  if @browser.text.include?("Watir") && @browser.text.include?("Hello world")
+    @result = true
+  else
+    @result = false
+  end
 end
 
-=begin
-  This code works, but obviously you'll need to substitute valid
-  credentials for it to do so.
-
-  Not counting some struggles I had with installation, this challenge
-  took me about 45-50 minutes to complete. After figuring out syntax,
-  the bulk of my time was spent figuring out how to select the email 
-  I want - primarily because I had some trouble selecting the appropriate
-  table without any reliable classes or IDs.
-
-  Also, sorry about the utter lack of commit history - just found out
-  at the end that I should submit via Github.
-=end
+Then /^I close the browser$/ do 
+  if @result == true
+    puts "Looks like everything ran properly!"
+  else
+    puts "Looks like something didn't quite go right."
+  end
+  @browser.close
+end
