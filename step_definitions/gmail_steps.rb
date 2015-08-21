@@ -65,6 +65,10 @@ Then /^I check to make sure I clicked the right email$/ do
 end
 
 Then /^I close the browser$/ do 
+  @browser.close
+end
+
+Then /^I close my browser$/ do 
   if @result == true
     puts "Looks like everything ran properly!"
   else

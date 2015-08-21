@@ -1,5 +1,3 @@
-# See comments in steps file
-
 Feature: As a valid user I should be able to log in to Gmail.
     
   Scenario: I log in under my username and the valid password

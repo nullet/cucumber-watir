@@ -1,5 +1,3 @@
-# See comments in steps file
-
 Feature: As a valid user I should be able to log in to Gmail and mail myself stuff.
     
   Scenario: I log in under my username and the valid password
@@ -22,4 +20,4 @@ Feature: As a valid user I should be able to log in to Gmail and mail myself stu
     Then I click on the first email
     And I wait 5 sec
     Then I check to make sure I clicked the right email
-    Then I close the browser
+    Then I close my browser
