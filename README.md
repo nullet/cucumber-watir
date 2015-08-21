@@ -1,5 +1,5 @@
-This code works, but obviously you'll need to substitute valid
-credentials for it to do so.
+This code works, but you'll need to substitute valid
+credentials for it to do so (for simplicity's sake, I decided not to use a config file).
 
 Not counting some struggles I had with installation, the original challenge
 took me about 45-50 minutes to complete. After figuring out syntax,
